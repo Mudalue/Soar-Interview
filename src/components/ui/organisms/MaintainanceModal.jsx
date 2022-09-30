@@ -1,23 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { colors } from "../../constants/color";
-import Button from "../atoms/general/Button";
 import Location from "../molecules/forms/Location";
 import SystemType from "../molecules/forms/SystemType";
 
 const MaintainanceModal = () => {
-  const [isLocation, setIsLocation] = useState(false);
-  const [isSystem, setIsSystem] = useState(false);
-
-  //handle location
-  const handlelocation = () => {
-    setIsLocation(true);
-    setIsSystem(false)
-  };
-  //handle system type
-  const handlesystemtype = () => {
-    setIsSystem(true);
-    setIsLocation(false)
-  };
+;
   return (
     <>
       <div
@@ -44,38 +31,69 @@ const MaintainanceModal = () => {
               <div
                 style={{
                   backgroundColor: colors.grey,
-                  padding: 10,
+                  paddingTop: 10,
                   display: "flex",
                   justifyContent: "center",
                   margin: "0 60px",
                   borderRadius: 10,
+                  alignItems: "center",
                 }}
               >
-                <div className="d-flex">
-                  <div>
-                    <Button
-                      text="Location"
-                      color={colors.red}
-                      background={colors.white}
-                      solid={true}
-                      onclick={handlelocation}
-                    />
-                  </div>
-                  <div className="mx-2">
-                    <Button
-                      text="System Type"
-                      color={colors.red}
-                      background={colors.white}
-                      solid={true}
-                      onclick={handlesystemtype}
-                    />
-                  </div>
-                </div>
+                <ul
+                  className="nav nav-pills mb-2"
+                  id="pills-tab"
+                  role="tablist"
+                >
+                  <li className="nav-item" role="presentation">
+                    <button
+                      className="nav-link active "
+                      id="location-home-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#location-home"
+                      type="button"
+                      role="tab"
+                      aria-controls="location-home"
+                      aria-selected="true"
+                    >
+                      Home
+                    </button>
+                  </li>
+                  <li className="nav-item" role="presentation">
+                    <button
+                      className="nav-link"
+                      id="system-home-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#systemtype-home"
+                      type="button"
+                      role="tab"
+                      aria-controls="systemtype-home"
+                      aria-selected="false"
+                    >
+                      Profile
+                    </button>
+                  </li>
+                </ul>
               </div>
               <div className="row">
                 <div className="col-md-12">
-                  {isLocation && <Location />}
-                  {isSystem && <SystemType />}
+                  <div className="tab-content" id="pills-tabContent">
+                    <div
+                      className="tab-pane fade show active"
+                      id="location-home"
+                      role="tabpanel"
+                      aria-labelledby="location-home-tab"
+                    >
+                      <Location />
+                    </div>
+                    <div
+                      className="tab-pane fade"
+                      id="systemtype-home"
+                      role="tabpanel"
+                      aria-labelledby="system-home-tab"
+                    >
+                      <SystemType />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
