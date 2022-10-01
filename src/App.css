@@ -20,3 +20,8 @@ body {
   color: red;
   background-color: #fff;
 }
+label{
+  font-size: 14px;
+  line-height: 10px;
+  font-weight: 300;
+}

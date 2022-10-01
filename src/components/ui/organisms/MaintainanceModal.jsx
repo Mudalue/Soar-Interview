@@ -1,10 +1,43 @@
-import React from "react";
+import React, {useState} from "react";
 import { colors } from "../../constants/color";
-import Location from "../molecules/forms/Location";
-import SystemType from "../molecules/forms/SystemType";
+import {
+  equipment,
+  equipmentType,
+  location,
+  sbu,
+  systemTypes,
+} from "../../constants/content";
+import Select from "react-select";
+import Button from "../atoms/general/Button";
 
 const MaintainanceModal = () => {
-;
+    const [option, setOption] = useState({
+        location: "",
+        equipment: "",
+        equipmentType: "",
+        sbu: "",
+        systemTypes: ""
+    })
+  //location
+  const options = location.map((item) => {
+    return { label: item.name, value: item.id };
+  });
+  //Equipment
+  const equipmentOptions = equipment.map((item) => {
+    return { label: item.equipment, value: item.equipment };
+  });
+  // equpiment type
+  const equipmentTypeOptions = equipmentType.map((item) => {
+    return { label: item.name, value: item.id };
+  });
+  //sbulb
+  const sbulbOptions = sbu.map((item) => {
+    return { label: item.name, value: item.name };
+  });
+  //system types
+  const systemTypesOptions = systemTypes.map((item) => {
+    return { label: item.name, value: item.id };
+  });
   return (
     <>
       <div
@@ -34,7 +67,7 @@ const MaintainanceModal = () => {
                   paddingTop: 10,
                   display: "flex",
                   justifyContent: "center",
-                  margin: "0 60px",
+                  margin: "0 50px",
                   borderRadius: 10,
                   alignItems: "center",
                 }}
@@ -76,14 +109,46 @@ const MaintainanceModal = () => {
               </div>
               <div className="row">
                 <div className="col-md-12">
-                  <div className="tab-content" id="pills-tabContent">
+                  <div className="tab-content p-3" id="pills-tabContent">
                     <div
                       className="tab-pane fade show active"
                       id="location-home"
                       role="tabpanel"
                       aria-labelledby="location-home-tab"
                     >
-                      <Location />
+                      <div className="row mb-2">
+                        <div className="col-md-12">
+                          <label htmlFor="location">Location</label>
+                          <Select options={options} name="Location" />
+                        </div>
+                      </div>
+                      <div className="row mb-2">
+                        <div className="col-md-12">
+                          <label htmlFor="equipment">Equipment</label>
+                          <Select options={equipmentOptions} name="Equipment" />
+                        </div>
+                      </div>
+                      <div className="row mb-2">
+                        <div className="col-md-12">
+                          <label htmlFor="equipment type">Equipment Type</label>
+                          <Select
+                            options={equipmentTypeOptions}
+                            name="Equipment Type"
+                          />
+                        </div>
+                      </div>
+                      <div className="row mb-2">
+                        <div className="col-md-12">
+                          <label htmlFor="sbulb">Sbulb</label>
+                          <Select options={sbulbOptions} name="Sbulb" />
+                        </div>
+                      </div>
+                      <div className="row mb-2">
+                        <div className="col-md-12">
+                          <label htmlFor="status">Status</label>
+                          <Select options={sbulbOptions} name="status" />
+                        </div>
+                      </div>
                     </div>
                     <div
                       className="tab-pane fade"
@@ -91,9 +156,19 @@ const MaintainanceModal = () => {
                       role="tabpanel"
                       aria-labelledby="system-home-tab"
                     >
-                      <SystemType />
+                      <div className="row mb-2">
+                        <div className="col-md-12">
+                          <label htmlFor="system">System Types</label>
+                          <Select options={systemTypesOptions} name="system types" />
+                        </div>
+                      </div>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div className="row my-2">
+                <div className="col-md-12">
+                    <Button color="#fff" solid={true} text="Submit" width="100%" background="#000" size="lg"/>
                 </div>
               </div>
             </div>

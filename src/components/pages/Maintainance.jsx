@@ -1,6 +1,9 @@
+import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
 import { colors } from "../constants/color";
 import MaintainanceModal from "../ui/organisms/MaintainanceModal";
+import { equipment } from "../constants/content";
+
 const style = {
   header: {
     display: "flex",
@@ -31,8 +34,29 @@ const style = {
     textAlign: "center",
     border: "none",
   },
+  tableCard: {
+    backgroundColor: "#fff",
+    height: 500,
+    borderRadius: 9,
+    marginTop: 30,
+    padding: 10,
+  },
 };
 const Maintainance = () => {
+  //table prop
+  const column = [
+    { field: "id", headerName: "id", width: 150 },
+    { field: "userId", headerName: "UserId", width: 150 },
+    { field: "transactionId", headerName: "Transactionid", width: 150 },
+    { field: "serialId", headerName: "SerialId", width: 150 },
+    { field: "systemTypeId", headerName: "SystemTypeId", width: 150 },
+    { field: "equipmentTypeId", headerName: "EquipmentTypeId", width: 150 },
+    { field: "locationId", headerName: "LocationId", width: 150 },
+    { field: "sbuId", headerName: "SbuId", width: 150 },
+    { field: "equipment", headerName: "Equipment", width: 150 },
+    { field: "createdAt", headerName: "CreatedAt", width: 150 },
+    { field: "updatedAt", headerName: "UpdatedAt", width: 150 },
+  ];
   const status = [
     { id: 1, name: "Total Available Equipment", amount: 10 },
     { id: 2, name: "Total Maintainance Equipment", amount: 153 },
@@ -80,6 +104,9 @@ const Maintainance = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div style={style.tableCard}>
+          <DataGrid rows={equipment} columns={column} />
         </div>
         {/* modal */}
         <MaintainanceModal />
