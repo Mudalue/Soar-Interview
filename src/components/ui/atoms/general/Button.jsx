@@ -6,10 +6,12 @@ const Button = ({ text, size, color, width, disabled, solid, pill, outline, icon
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
 
+
     //handle loader
     const loaderhandler = () => {
         setLoading(true);
         setShow(true);
+        window.location.reload();
       };
       useEffect(() => {
         if (loading) {

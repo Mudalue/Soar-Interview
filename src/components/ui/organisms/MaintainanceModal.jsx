@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { colors } from "../../constants/color";
 import {
   equipment,
@@ -11,13 +11,12 @@ import Select from "react-select";
 import Button from "../atoms/general/Button";
 
 const MaintainanceModal = () => {
-    const [option, setOption] = useState({
-        location: "",
-        equipment: "",
-        equipmentType: "",
-        sbu: "",
-        systemTypes: ""
-    })
+  const [locations, setLocation] = useState("");
+  const [equipments, setEquipment] = useState("");
+  const [equipmentTypes, setEquipmentType] = useState("");
+  const [sbus, setSbu] = useState("");
+  const [systemType, setSystemType] = useState("");
+
   //location
   const options = location.map((item) => {
     return { label: item.name, value: item.id };
@@ -38,6 +37,7 @@ const MaintainanceModal = () => {
   const systemTypesOptions = systemTypes.map((item) => {
     return { label: item.name, value: item.id };
   });
+  console.log(locations.value)
   return (
     <>
       <div
@@ -79,7 +79,7 @@ const MaintainanceModal = () => {
                 >
                   <li className="nav-item" role="presentation">
                     <button
-                      className="nav-link active "
+                      className="nav-link active"
                       id="location-home-tab"
                       data-bs-toggle="pill"
                       data-bs-target="#location-home"
@@ -119,13 +119,25 @@ const MaintainanceModal = () => {
                       <div className="row mb-2">
                         <div className="col-md-12">
                           <label htmlFor="location">Location</label>
-                          <Select options={options} name="Location" />
+                          <Select
+                            options={options}
+                            name="Location"
+                            placeholder=""
+                            defaultValue={locations}
+                            onChange={(selectedOption)=> {setLocation(selectedOption);}}
+                          />
                         </div>
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-12">
                           <label htmlFor="equipment">Equipment</label>
-                          <Select options={equipmentOptions} name="Equipment" />
+                          <Select
+                            options={equipmentOptions}
+                            name="Equipment"
+                            placeholder=""
+                            value={equipments}
+                            onChange={(selectedOption)=> setEquipment(selectedOption)}
+                          />
                         </div>
                       </div>
                       <div className="row mb-2">
@@ -134,19 +146,32 @@ const MaintainanceModal = () => {
                           <Select
                             options={equipmentTypeOptions}
                             name="Equipment Type"
+                            placeholder=""
+                            value={equipmentTypes}
+                            onChange={(selectedOption)=> setEquipmentType(selectedOption)}
                           />
                         </div>
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-12">
                           <label htmlFor="sbulb">Sbulb</label>
-                          <Select options={sbulbOptions} name="Sbulb" />
+                          <Select
+                            options={sbulbOptions}
+                            name="Sbulb"
+                            placeholder=""
+                            value={sbus}
+                            onChange={(selectedOption)=> setSbu(selectedOption)}
+                          />
                         </div>
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-12">
                           <label htmlFor="status">Status</label>
-                          <Select options={sbulbOptions} name="status" />
+                          <Select
+                            options={sbulbOptions}
+                            name="status"
+                            placeholder=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -159,7 +184,13 @@ const MaintainanceModal = () => {
                       <div className="row mb-2">
                         <div className="col-md-12">
                           <label htmlFor="system">System Types</label>
-                          <Select options={systemTypesOptions} name="system types" />
+                          <Select
+                            options={systemTypesOptions}
+                            name="system types"
+                            placeholder=""
+                            value={systemType}
+                            onChange={(selectedOption)=> setSystemType(selectedOption)}
+                          />
                         </div>
                       </div>
                     </div>
@@ -168,7 +199,23 @@ const MaintainanceModal = () => {
               </div>
               <div className="row my-2">
                 <div className="col-md-12">
-                    <Button color="#fff" solid={true} text="Submit" width="100%" background="#000" size="lg"/>
+                  <Button
+                    color="#fff"
+                    solid={true}
+                    text="Submit"
+                    width="100%"
+                    background="#000"
+                    size="lg"
+                    disabled={
+                      locations.value &&
+                      equipments.value &&
+                      equipmentTypes.value &&
+                      systemType.value &&
+                      sbus.value !== ""
+                        ? false
+                        : true
+                    }
+                  />
                 </div>
               </div>
             </div>
